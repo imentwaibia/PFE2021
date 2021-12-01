@@ -1,10 +1,8 @@
-import "./style.css";
-import classNames from "classnames";
-// @material-ui/core components
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-// @material-ui/icons
 
-// core components
+import classNames from "classnames";
+
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -26,7 +24,7 @@ import ErrorModel from "../../models/error-model";
 import SuccessModel from "../../models/success-model";
 import { Authcontext } from "../../context/auth-context";
 import ReactScrollableFeed from "react-scrollable-feed";
-
+import "./style.css";
 const useStyles = makeStyles(styles, {
   table: {
     minWidth: 700,
@@ -119,7 +117,7 @@ function Chat(props) {
       console.log(err);
       seterror(err.message || "probleme!!");
     }
-    scroll.current.scrollIntoView({ behavior: "smooth" });
+    scroll.current.scrollIntoView({ behavior: "auto", block: "center", inline: "nearest" });
   }
 
   return (
@@ -204,6 +202,7 @@ function Chat(props) {
                             fontWeight: "550",
                             margin: "4px 5% -13px 5%",
                             maxWidth: "200px",
+        
                           }}
                           type="submit"
                         >

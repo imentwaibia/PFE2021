@@ -43,6 +43,7 @@ export default function HeaderLinks(props) {
           </Link>
         </Button>
       </ListItem>
+      {!auth.token && (
      < ListItem className={classes.listItem}>
         <Button color="transparent" target="_blank">
           <Link
@@ -55,7 +56,7 @@ export default function HeaderLinks(props) {
           </Link>
         </Button>
       </ListItem>
-      
+      )}
       {!auth.token && (
         <ListItem className={classes.listItem}>
            <Link
@@ -100,6 +101,9 @@ export default function HeaderLinks(props) {
               <Link to="/liste-evenement" className={classes.dropdownLink}>
                 Mes Evenement
               </Link>,
+              <Link to="/profile-page" className={classes.dropdownLink}>
+              Mon profile
+            </Link>,
               
               <Link
                 className={classes.dropdownLink}
@@ -117,7 +121,9 @@ export default function HeaderLinks(props) {
       )}
 
 {auth.user.role==="admin" && (
+  
         <ListItem className={classes.listItem}>
+          
           <CustomDropdown
             noLiPadding
             buttonText="Menu"

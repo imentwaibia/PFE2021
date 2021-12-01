@@ -93,7 +93,7 @@ export default function ProfilePage(props) {
       setIsValid(false);
       fileIsValid = false;
     }
-    /* props.onInput(props.id, pickedFile, fileIsValid); */
+    
   };
 
   const pickImageHandler = (event) => {
@@ -265,7 +265,7 @@ export default function ProfilePage(props) {
                           endAdornment: (
                             <InputAdornment position="end">
                               <Icon className={classes.inputIconsColor}>
-                                lock_outline
+                                
                               </Icon>
                             </InputAdornment>
                           ),
@@ -305,8 +305,8 @@ export default function ProfilePage(props) {
                           type="date"
                           id="start"
                           name="date"
-                          min="1900-01-01"
-                          max="2021-12-31"
+                          min="2000-01-01"
+                          max="2021-10-31"
                           required
                           onChange={onchange}
                         ></input>

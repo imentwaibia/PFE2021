@@ -47,7 +47,7 @@ export default function UpdateEvenement(props) {
     const sendRequest = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/evenement/${auth.userId}`
+          `http://localhost:5000/api/evenement/${id}`
         );
 
         const responseData = await response.json();
@@ -82,7 +82,7 @@ export default function UpdateEvenement(props) {
       setIsValid(false);
       fileIsValid = false;
     }
-    /* props.onInput(props.id, pickedFile, fileIsValid); */
+  
   };
 
   const pickImageHandler = (event) => {
@@ -187,6 +187,7 @@ export default function UpdateEvenement(props) {
                       {!isValid && <p></p>}
                     </div>
                     <CustomInput
+                    value={titre}
                       labelText="Titre..."
                       id="first"
                       name="titre"
@@ -209,26 +210,28 @@ export default function UpdateEvenement(props) {
                       <Form.Label>Date</Form.Label>
                       <br></br>
                       <input
+                      
                         type="date"
                         id="start"
                         name="type"
-                        min="1900-01-01"
-                        max="2021-12-31"
+                        min="2000-01-01"
+                        max="2021-10-31"
                         required
                         onChange={onchange}
                       ></input>
                     </Form.Group>
 
                     <Form.Group controlId="exampleForm.ControlTextarea1">
-                      <Form.Label>Description</Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        rows={5}
-                        name="description"
-                        onChange={onchange}
-                        required
-                      />
-                    </Form.Group>
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control
+                          as="textarea"
+                          value={description}
+                          rows={5}
+                          required
+                          name="description"
+                          onChange={onchange}
+                        />
+                      </Form.Group>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
                     <Button simple color="primary" size="lg" type="submit">
