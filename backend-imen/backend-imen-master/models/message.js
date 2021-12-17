@@ -1,4 +1,6 @@
+//require mongoose
 const mongoose = require("mongoose");
+//shema
 const schema = mongoose.Schema;
 
 const messageSchema = new schema({

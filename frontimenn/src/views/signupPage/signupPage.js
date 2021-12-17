@@ -133,7 +133,7 @@ export default function SignupPage(props) {
       <Header
         absolute
         color="transparent"
-        brand=""
+        brand="Happy Kids"
         rightLinks={<HeaderLinks />}
         {...rest}
       />
@@ -245,6 +245,7 @@ export default function SignupPage(props) {
                         autoComplete: "off",
                       }}
                       name="password"
+                      type="password"
                       onChange={onchange}
                     />
 
@@ -262,6 +263,7 @@ export default function SignupPage(props) {
                       labelText="telephone..."
                       id="first"
                       name="tel"
+                      type="number"
                       onChange={onchange}
                       formControlProps={{
                         fullWidth: true,

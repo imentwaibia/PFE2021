@@ -141,14 +141,14 @@ export default function ProfilePage(props) {
     formData.append("tel", tel);
     formData.append("date", date);
     formData.append("description", description);
-    formData.append("description", description);
+    
     try {
       await axios.patch(
         `http://localhost:5000/api/jardin/${auth.userId}`,
         formData
       );
 
-      setsuccess("Votre demande est enregistre.");
+      setsuccess("Votre profil a été modifier .");
     } catch (err) {
       console.log(err);
       seterror(err.message || "probleme!!");
@@ -159,7 +159,7 @@ export default function ProfilePage(props) {
     <div>
       <Header
         color="transparent"
-        brand="Material Kit React"
+        brand="Happy Kids"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{

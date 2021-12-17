@@ -34,24 +34,15 @@ export default function UpdateActivity(props) {
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
+  
 
   const [File, setFile] = useState();
   const [previewUrl, setPreviewUrl] = useState();
   const [isValid, setIsValid] = useState(false);
-
+  
   const filePickerRef = useRef();
 
-  useEffect(() => {
-    if (!File) {
-      return;
-    }
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      setPreviewUrl(fileReader.result);
-    };
-
-    fileReader.readAsDataURL(File);
-  }, [File]);
+ 
 
   const pickedHandler = (event) => {
     let pickedFile;
@@ -65,9 +56,8 @@ export default function UpdateActivity(props) {
       setIsValid(false);
       fileIsValid = false;
     }
-    /* props.onInput(props.id, pickedFile, fileIsValid); */
+    
   };
-
   const pickImageHandler = (event) => {
     filePickerRef.current.click();
   };
@@ -77,6 +67,28 @@ export default function UpdateActivity(props) {
   const [description, setDescription] = useState();
   const [error, seterror] = useState(null);
   const [success, setsuccess] = useState(null);
+  useEffect(() => {
+    const sendRequest = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/activity/activity/${id}`
+        );
+
+        const responseData = await response.json();
+        if (!response.ok) {
+          throw new Error(responseData.message);
+        }
+
+        setTitre(responseData.existingActivity.titre);
+        setType(responseData.existingActivity.type);
+        setDescription(responseData.existingActivity.description);
+      } catch (err) {
+        seterror(err.message);
+      }
+    };
+
+    sendRequest();
+  }, []);
 
   const onchange = (e) => {
     if (e.target.name === "titre") {
@@ -87,27 +99,25 @@ export default function UpdateActivity(props) {
       setDescription(e.target.value);
     }
   };
-
   const id = useParams().id;
-
   const submit = async (e) => {
     e.preventDefault();
-
+    const formData = new FormData();
+    formData.append("image", File);
+    formData.append("titre", titre);
+    formData.append("type", type);
+    formData.append("description", description);
     try {
-      const formData = new FormData();
-      formData.append("image", File);
-      formData.append("titre", titre);
-      formData.append("type", type);
-      formData.append("description", description);
-
-      await axios.patch(`http://localhost:5000/api/activity/${id}`, formData);
-
-      setsuccess("Votre demande est enregistre.");
+      await axios.patch(`http://localhost:5000/api/activity/${id}`, formData) ;
+      setsuccess("activité modifié.");
+      seterror(null)
     } catch (err) {
-      console.log(err);
+      
       seterror(err.message || "probleme!!");
     }
   };
+
+ 
 
   const classes = useStyles();
   const { ...rest } = props;
@@ -116,7 +126,7 @@ export default function UpdateActivity(props) {
       <Header
         absolute
         color="transparent"
-        brand="Material Kit React"
+        brand="Happy Kids"
         rightLinks={<HeaderLinks />}
         {...rest}
       />
@@ -134,36 +144,8 @@ export default function UpdateActivity(props) {
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form} onSubmit={submit}>
                   <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>Ajout Activité</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div>
+                    <h4>Modifier Activité</h4>
+                   
                   </CardHeader>
                   <ErrorModel error={error} />
                   <SuccessModel success={success} />
@@ -193,21 +175,16 @@ export default function UpdateActivity(props) {
                           />
                         )}
 
-                        <Button
-                          type="button"
-                          variant="primary"
-                          onClick={pickImageHandler}
-                          style={{ marginTop: "20px" }}
-                        >
-                          Choisir une image
-                        </Button>
+                        
                       </div>
                       {!isValid && <p></p>}
                     </div>
+                    <Form.Label>Titre</Form.Label>
                     <CustomInput
-                      labelText="Titre..."
+                     
                       id="first"
                       name="titre"
+                      value={titre}
                       required
                       onChange={onchange}
                       formControlProps={{
@@ -222,11 +199,12 @@ export default function UpdateActivity(props) {
                         ),
                       }}
                     />
-
+                    <Form.Label>Type</Form.Label>
                     <CustomInput
-                      labelText="Type..."
+                     
                       id="first"
                       name="type"
+                      value={type}
                       required
                       onChange={onchange}
                       formControlProps={{
@@ -246,6 +224,7 @@ export default function UpdateActivity(props) {
                       <Form.Label>Description</Form.Label>
                       <Form.Control
                         as="textarea"
+                        value={description}
                         rows={5}
                         name="description"
                         onChange={onchange}
@@ -255,7 +234,7 @@ export default function UpdateActivity(props) {
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
                     <Button simple color="primary" size="lg" type="submit">
-                      Ajouter
+                      Modifier
                     </Button>
                   </CardFooter>
                 </form>

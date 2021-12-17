@@ -24,6 +24,7 @@ import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { Authcontext } from "../../context/auth-context";
 import ErrorModel from "../../models/error-model";
+import SuccessModel from "../../models/success-model";
 import Button from "@material-ui/core/Button";
 import AjoutBTN from "views/Components/Sections/btnAjout";
 import { Link } from "react-router-dom";
@@ -122,6 +123,7 @@ export default function ListParent(props) {
             <GridContainer justify="center">
               <GridItem xs={12} className={classes.navWrapper}>
                 <ErrorModel error={error} />
+                <SuccessModel success={success} />
                 <InputLabel htmlFor="input-with-icon-adornment">
                   Chercher
                 </InputLabel>

@@ -106,7 +106,7 @@ export default function AjoutActivity(props) {
         formData
       );
 
-      setsuccess("Votre demande est enregistre.");
+      setsuccess("Activité ajouté.");
     } catch (err) {
       console.log(err);
       seterror(err.message || "probleme!!");
@@ -120,7 +120,7 @@ export default function AjoutActivity(props) {
       <Header
         absolute
         color="transparent"
-        brand="Material Kit React"
+        brand="Happy Kids"
         rightLinks={<HeaderLinks />}
         {...rest}
       />
@@ -139,39 +139,11 @@ export default function AjoutActivity(props) {
                 <form className={classes.form} onSubmit={submit}>
                   <CardHeader color="primary" className={classes.cardHeader}>
                     <h4>Ajout Activité</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div>
+                    
                   </CardHeader>
                   <ErrorModel error={error} />
                   <SuccessModel success={success} />
-                  <p className={classes.divider}>Or Be Classical</p>
+                  <p className={classes.divider}></p>
                   <CardBody>
                     <div
                       style={{

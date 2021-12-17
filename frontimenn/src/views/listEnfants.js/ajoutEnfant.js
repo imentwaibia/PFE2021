@@ -108,7 +108,7 @@ export default function AjoutEnfant(props) {
         formData
       );
 
-      setsuccess("Votre demande est enregistre.");
+      setsuccess("enfant ajouté avec succès");
     } catch (err) {
       console.log(err);
       seterror(err.message || "probleme!!");
@@ -122,7 +122,7 @@ export default function AjoutEnfant(props) {
       <Header
         absolute
         color="transparent"
-        brand=""
+        brand="Happy Kids"
         rightLinks={<HeaderLinks />}
         {...rest}
       />
@@ -141,35 +141,7 @@ export default function AjoutEnfant(props) {
                 <form className={classes.form} onSubmit={submit}>
                   <CardHeader color="primary" className={classes.cardHeader}>
                     <h4>Ajout Enfant</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div>
+                    
                   </CardHeader>
                   <ErrorModel error={error} />
                   <SuccessModel success={success} />
@@ -214,6 +186,7 @@ export default function AjoutEnfant(props) {
                       labelText="Nom..."
                       id="first"
                       name="nom"
+                    
                       onChange={onchange}
                       formControlProps={{
                         fullWidth: true,
@@ -253,7 +226,7 @@ export default function AjoutEnfant(props) {
                         type="date"
                         id="start"
                         name="date"
-                        min="1900-01-01"
+                        min="2016-01-01"
                         max="2021-12-31"
                         required
                         onChange={onchange}

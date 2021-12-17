@@ -1,5 +1,7 @@
+//require mongoose
 const mongoose =require("mongoose")
 const uniqueValidator = require('mongoose-unique-validator')
+//shema
 const schema = mongoose.Schema;
 
 const parentsSchema = new schema({

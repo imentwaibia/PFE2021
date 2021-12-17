@@ -45,11 +45,7 @@ const ajoutEnfant = async (req, res, next) => {
 };
 
 const updateEnfant = async (req, res, next) => {
-  const error = validationResult(req);
-  if (!error.isEmpty()) {
-    return next(new httpError("invalid input passed ", 422));
-  }
-
+  
   const { nom, prenom, Dnaissance } = req.body;
   const id = req.params.id;
   let existingEnfant;
@@ -62,8 +58,6 @@ const updateEnfant = async (req, res, next) => {
   existingEnfant.nom = nom;
   existingEnfant.prenom = prenom;
   existingEnfant.Dnaissance = Dnaissance;
-  existingEnfant.photo = req.file.path;
-
   try {
     existingEnfant.save();
   } catch {
@@ -71,6 +65,31 @@ const updateEnfant = async (req, res, next) => {
   }
 
   res.status(200).json({ existingEnfant: existingEnfant });
+};
+
+//getAllEnfant
+const getEnfant = async (req, res, next) => {
+  let existingEnfant;
+  try {
+    existingEnfant = await enfant.find({}, "-pasword");
+  } catch {
+    const error = new httpError("failed signup", 500);
+    return next(error);
+  }
+  res.json({ existingEnfant: existingEnfant });
+};
+
+//get Enfant ById
+const getEnfantById = async (req, res, next) => {
+  const id = req.params.id;
+  let existingEnfant;
+  try {
+    existingEnfant = await enfant.findById(id);
+  } catch {
+    const error = new httpError("failed ", 500);
+    return next(error);
+  }
+  res.json({ existingEnfant: existingEnfant });
 };
 
 const getEnfantsByJardinId = async (req, res, next) => {
@@ -81,7 +100,7 @@ const getEnfantsByJardinId = async (req, res, next) => {
     existingEnfant = await jardin.findById(jardinId).populate("enfants");
   } catch (err) {
     const error = new httpError(
-      "Fetching enfats failed, please try again later.",
+      "Fetching enfants failed, please try again later.",
       500
     );
     return next(error);
@@ -108,7 +127,7 @@ const getEnfantsByParentId = async (req, res, next) => {
     existingEnfant = await parent.findById(id).populate("enfants");
   } catch (err) {
     const error = new httpError(
-      "Fetching enfats failed, please try again later.",
+      "Fetching enfants failed, please try again later.",
       500
     );
     return next(error);
@@ -207,3 +226,5 @@ exports.ajoutEnfantParJardin = ajoutEnfantParJardin;
 exports.deleteEnfant = deleteEnfant;
 
 exports.getEnfantsByParentId = getEnfantsByParentId
+exports.getEnfant=getEnfant;
+exports.getEnfantById=getEnfantById;

@@ -17,6 +17,7 @@ import ErrorModel from "../../../models/error-model";
 import SuccessModel from "../../../models/success-model";
 import AccessibilityIcon from "@material-ui/icons/Accessibility";
 import {Link} from 'react-router-dom';
+
 const useStyles = makeStyles(styles);
 
 
@@ -81,6 +82,8 @@ const List = (props) => {
   const { ...rest } = props;
 
   return (
+  
+           
     <div style={{  backgroundColor: "#FDEDEC"}}>
       <Header
         absolute
@@ -97,9 +100,12 @@ const List = (props) => {
           backgroundPosition: "top center",
         }}
       >
+       
         <div className={classes.container}>
+          
               <center>
       <Container style={{  margin: "2%" }}>
+      
         <Row>
           <Col></Col>
           <Col xs={12}>
@@ -121,7 +127,8 @@ const List = (props) => {
                 <TableBody>
                   {list &&
                     list.map((row) => (
-                      <StyledTableRow key={row.name}>
+                      row.nom != "admin"
+                      ?(<StyledTableRow key={row.name}>
                         <StyledTableCell component="th" scope="row">
                           <Image
                             src={`http://localhost:5000/${row.logo}`}
@@ -152,7 +159,8 @@ const List = (props) => {
                             />
                           </Link>
                         </StyledTableCell>
-                      </StyledTableRow>
+                      </StyledTableRow>)
+                      :null
                     ))}
                 </TableBody>
               </Table>
@@ -162,8 +170,9 @@ const List = (props) => {
         </Row>
       </Container>
     </center>
+    
     </div>
-    </div>
+    </div> 
     </div>
   );
 };

@@ -27,8 +27,9 @@ route.patch(
   ],
   activityControllers.updateActivity
 );
-
+route.get("/", activityControllers.getActivity);
 route.get('/:id',activityControllers.getEnfantsByJardinId)
 route.delete('/:id',activityControllers.deleteActivity)
+route.get("/activity/:id", activityControllers.getActivityById);
 
 module.exports = route;

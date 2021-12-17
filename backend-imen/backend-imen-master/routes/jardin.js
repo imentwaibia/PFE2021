@@ -1,3 +1,4 @@
+// express
 const express = require("express");
 const route = express.Router();
 
@@ -6,23 +7,23 @@ const jardinControllers = require("../controllers/jardin");
 const { check } = require("express-validator");
 
 const fileUpload = require("../middleware/file-upload");
-
+// signup
 route.post(
   "/signup",
   fileUpload.single("image"),
   [
     check("nom").not().isEmpty(),
-    check("email").normalizeEmail(),
+    check("email").isEmail(),
     check("password").isLength({ min: 8 }),
     check("description").not().isEmpty(),
-    check("tel").isLength({ min: 8 }),
+    check("tel", "enter a valid phone number").isLength({ min: 8,maxLength: 11 }),
   ],
   jardinControllers.signup
 );
 
 route.post(
   "/login",
-  check("email").normalizeEmail(),
+  check("email").isEmail(),
   check("password").isLength({ min: 8 }),
   jardinControllers.login
 );
@@ -32,10 +33,10 @@ route.patch(
   fileUpload.single("image"),
   [
     check("nom").not().isEmpty(),
-    check("email").normalizeEmail(),
+    check("email").isEmail(),
     check("password").isLength({ min: 8 }),
     check("description").not().isEmpty(),
-    check("tel").isLength({ min: 8 }),
+    check("tel", "enter a valid phone number").isLength({ min: 8,maxLength: 11 }),
   ],
   jardinControllers.updateJardin
 );

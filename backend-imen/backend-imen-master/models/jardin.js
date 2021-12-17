@@ -1,5 +1,8 @@
+//require mongoose
 const mongoose =require("mongoose")
+
 const uniqueValidator = require('mongoose-unique-validator')
+// schema
 const schema = mongoose.Schema;
 
 const jardinSchema = new schema({
@@ -11,7 +14,7 @@ const jardinSchema = new schema({
     logo:{type:String,required:true},
     nbr_employeur:{type:String,required:true},
     date_creation:{type:String,required:true},
-    tel:{type:String,required:true,minlength:8},
+    tel:{type:String,required:true,minlength:8,maxLength: 11},
     actif:{type:String,required:true},
     confirmation:{type:String,required:true},
     role: { type: String, default: "jardin" },

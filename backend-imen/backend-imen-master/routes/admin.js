@@ -10,7 +10,7 @@ check('name')
 .not()
 .isEmpty(),
 check('email')
-.normalizeEmail(),
+.isEmail(),
 check('password')
 .isLength({min:8})
 , adminControllers.signup)
@@ -18,7 +18,7 @@ check('password')
 
 route.post('/login', 
 check('email')
-.normalizeEmail(),
+.isEmail(),
 check('password')
 .isLength({min:8})
 , adminControllers.AdminLogin)

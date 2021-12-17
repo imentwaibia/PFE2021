@@ -1,4 +1,6 @@
+//require mongoose
 const mongoose = require("mongoose");
+//schema
 const schema = mongoose.Schema;
 
 const ReclamationSchema = new schema({

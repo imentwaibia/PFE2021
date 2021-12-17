@@ -93,7 +93,7 @@ export default function ListeEvenement(props) {
     <div>
       <Header
         color="transparent"
-        brand=""
+        brand="Happy Kids"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{

@@ -36,12 +36,13 @@ route.patch(
   check("Dnaissance").not().isEmpty()],
   enfantControllers.updateEnfant
 );
-
+route.get('/',enfantControllers.getEnfant); 
 route.get("/jardin/:id", enfantControllers.getEnfantsByJardinId);
 route.get("/parent/:id", enfantControllers.getEnfantsByParentId);
+route.get("/enfant/:id",enfantControllers.getEnfantById);
 
-route.delete('/:id',enfantControllers.deleteEnfant)
+route.delete('/:id',enfantControllers.deleteEnfant);
 
-/* route.get('/:id',enfantControllers.getEnfant) */
+ 
 
 module.exports = route;

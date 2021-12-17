@@ -44,31 +44,16 @@ export default function UpdateEvenement(props) {
   const filePickerRef = useRef();
 
   useEffect(() => {
-    const sendRequest = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:5000/api/evenement/${id}`
-        );
-
-        const responseData = await response.json();
-        if (!response.ok) {
-          throw new Error(responseData.message);
-        }
-
-       
-        setTitre(responseData.existingEvenement.titre)
-        setType(responseData.existingEvenement.type)
-        setDescription(responseData.existingEvenement.description)
-        
-        
-      }
-       catch (err) {
-        seterror(err.message);
-      }
+    if (!File) {
+      return;
+    }
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setPreviewUrl(fileReader.result);
     };
 
-    sendRequest();
-  }, []);
+    fileReader.readAsDataURL(File);
+  }, [File]);
 
   const pickedHandler = (event) => {
     let pickedFile;
@@ -95,6 +80,28 @@ export default function UpdateEvenement(props) {
   const [error, seterror] = useState(null);
   const [success, setsuccess] = useState(null);
 
+  useEffect(() => {
+    const sendRequest = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/evenement/evenement/${id}`
+        );
+        const responseData = await response.json();
+        if (!response.ok) {
+          throw new Error(responseData.message);
+        }
+
+        setTitre(responseData.existingEvenement.titre);
+        setType(responseData.existingEvenement.type);
+        setDescription(responseData.existingEvenement.description);
+      }
+       catch (err) {
+        seterror(err.message);
+      }
+    };
+
+    sendRequest();
+  }, []);
   const onchange = (e) => {
     if (e.target.name === "titre") {
       setTitre(e.target.value);
@@ -109,17 +116,16 @@ export default function UpdateEvenement(props) {
 
   const submit = async (e) => {
     e.preventDefault();
-
-    try {
       const formData = new FormData();
       formData.append("image", File);
       formData.append("titre", titre);
       formData.append("date", type);
       formData.append("description", description);
-
+      try {
       await axios.patch(`http://localhost:5000/api/evenement/${id}`, formData);
 
-      setsuccess("Votre demande est enregistre.");
+      setsuccess("Événement modifié.");
+      seterror(null)
     } catch (err) {
       console.log(err);
       seterror(err.message || "probleme!!");
@@ -133,7 +139,7 @@ export default function UpdateEvenement(props) {
       <Header
         absolute
         color="transparent"
-        brand=""
+        brand="Happy Kids"
         rightLinks={<HeaderLinks />}
         {...rest}
       />
@@ -149,9 +155,11 @@ export default function UpdateEvenement(props) {
           <GridContainer justify="center">
             <GridItem xs={8}>
               <Card className={classes[cardAnimaton]}>
+              
                 <form className={classes.form} onSubmit={submit}>
+                
                   <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>Modifier Evenemenet</h4>
+                    <h4>Modifier Evenement</h4>
                     
                   </CardHeader>
                   <ErrorModel error={error} />
@@ -186,11 +194,13 @@ export default function UpdateEvenement(props) {
                       </div>
                       {!isValid && <p></p>}
                     </div>
+                    <Form.Label>Titre</Form.Label>
                     <CustomInput
                     value={titre}
-                      labelText="Titre..."
+                    
                       id="first"
                       name="titre"
+                      value={titre}
                       required
                       onChange={onchange}
                       formControlProps={{
@@ -214,6 +224,7 @@ export default function UpdateEvenement(props) {
                         type="date"
                         id="start"
                         name="type"
+                        value={type}
                         min="2000-01-01"
                         max="2021-10-31"
                         required
@@ -229,6 +240,7 @@ export default function UpdateEvenement(props) {
                           rows={5}
                           required
                           name="description"
+                          value={description}
                           onChange={onchange}
                         />
                       </Form.Group>

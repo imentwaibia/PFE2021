@@ -65,7 +65,7 @@ export default function AjoutEvenement(props) {
       setIsValid(false);
       fileIsValid = false;
     }
-    /* props.onInput(props.id, pickedFile, fileIsValid); */
+   
   };
 
   const pickImageHandler = (event) => {
@@ -103,7 +103,7 @@ export default function AjoutEvenement(props) {
 
       await axios.post(`http://localhost:5000/api/evenement/ajout`, formData);
 
-      setsuccess("Votre demande est enregistre.");
+      setsuccess("Événement ajouté .");
     } catch (err) {
       console.log(err);
       seterror(err.message || "probleme!!");
@@ -117,7 +117,7 @@ export default function AjoutEvenement(props) {
       <Header
         absolute
         color="transparent"
-        brand=""
+        brand="Happy Kids"
         rightLinks={<HeaderLinks />}
         {...rest}
       />
@@ -136,35 +136,7 @@ export default function AjoutEvenement(props) {
                 <form className={classes.form} onSubmit={submit}>
                   <CardHeader color="primary" className={classes.cardHeader}>
                     <h4>Ajout Activité</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div>
+                    
                   </CardHeader>
                   <ErrorModel error={error} />
                   <SuccessModel success={success} />

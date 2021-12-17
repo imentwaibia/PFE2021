@@ -1,9 +1,12 @@
+//1-require express
 const express = require("express");
+//2-instance of express
 const app = express();
+
 const bodyParser = require("body-parser");
 
 const path = require("path");
-
+// require routes
 const adminRoutes = require("./routes/admin");
 const jardinRoutes = require("./routes/jardin");
 const parentsRoutes = require("./routes/parent");
@@ -14,11 +17,11 @@ const messageRoutes = require("./routes/message");
 const ReclamationRoute = require("./routes/reclamation");
 
 const httperror = require("./models/error");
-
+//require mongoose
 const mongoose = require("mongoose");
 
 app.use(bodyParser.json());
-
+//img
 app.use("/uploads/images", express.static(path.join("uploads", "images")));
 
 app.use((req, res, next) => {
@@ -31,7 +34,7 @@ app.use((req, res, next) => {
 
   next();
 });
-
+// import routes
 app.use("/api/admin", adminRoutes);
 app.use("/api/jardin", jardinRoutes);
 app.use("/api/parent", parentsRoutes);
@@ -53,12 +56,13 @@ app.use((error, req, res, next) => {
   res.status(error.code || 500);
   res.json({ message: error.message || "an unknown error occurred " });
 });
-
+//connect to db
 mongoose
   .connect(
     "mongodb+srv://jardin:jardin@cluster0.jmmuw.mongodb.net/jardin?retryWrites=true&w=majority"
   )
   .then(() => {
+    // create server
     app.listen(5000);
   })
   .catch((err) => {

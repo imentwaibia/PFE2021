@@ -47,7 +47,7 @@ export default function HeaderLinks(props) {
      < ListItem className={classes.listItem}>
         <Button color="transparent" target="_blank">
           <Link
-            to="/"
+            to="/signup-page"
             className={classes.navLink}
             style={{ marginTop: "-17px" }}
           >

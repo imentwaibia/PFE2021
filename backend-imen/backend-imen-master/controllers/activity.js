@@ -38,11 +38,6 @@ const ajoutActivity = async (req, res, next) => {
 };
 
 const updateActivity = async (req, res, next) => {
-  const error = validationResult(req);
-  if (!error.isEmpty()) {
-    return next(new httpError("invalid input passed ", 422));
-  }
-
   const { titre, type, description } = req.body;
   const id = req.params.id;
   let existingActivity;
@@ -55,9 +50,6 @@ const updateActivity = async (req, res, next) => {
   existingActivity.titre = titre;
   existingActivity.type = type;
   existingActivity.description = description;
-
-  existingActivity.image = req.file.path;
-
   try {
     existingActivity.save();
   } catch {
@@ -115,7 +107,35 @@ const deleteActivity = async (req, res, next) => {
 };
 
 
+//getAllActivity
+const getActivity = async (req, res, next) => {
+  let existingActivity;
+  try {
+    existingActivity = await activity.find({}, "-pasword");
+  } catch {
+    const error = new httpError("failed signup", 500);
+    return next(error);
+  }
+  res.json({ existingActivity: existingActivity });
+};
+
+//get activity by id
+const getActivityById = async (req, res, next) => {
+  const id = req.params.id;
+  let existingActivity;
+  try {
+    existingActivity = await activity.findById(id);
+  } catch {
+    const error = new httpError("failed signup", 500);
+    return next(error);
+  }
+  res.json({ existingActivity: existingActivity });
+};
+
+
 exports.ajoutActivity =ajoutActivity
+exports.getActivityById = getActivityById;
 exports.updateActivity = updateActivity
+exports.getActivity = getActivity;
 exports.getEnfantsByJardinId = getEnfantsByJardinId
 exports.deleteActivity = deleteActivity

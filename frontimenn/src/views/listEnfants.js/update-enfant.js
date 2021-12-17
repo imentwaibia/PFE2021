@@ -41,34 +41,19 @@ export default function UpdateEnfant(props) {
   const [isValid, setIsValid] = useState(false);
 
   const filePickerRef = useRef();
-
- 
   useEffect(() => {
-    const sendRequest = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:5000/api/enfant/${id}`
-        );
-
-        const responseData = await response.json();
-        if (!response.ok) {
-          throw new Error(responseData.message);
-        }
-
-       
-        setNom(responseData.enfant.nom)
-        setPrenom(responseData.enfant.prenom)
-        setDate(responseData.enfant.date)
-        
-        
-      }
-       catch (err) {
-        seterror(err.message);
-      }
+    if (!File) {
+      return;
+    }
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setPreviewUrl(fileReader.result);
     };
 
-    sendRequest();
-  }, []);
+    fileReader.readAsDataURL(File);
+  }, [File]);
+
+ 
 
   const pickedHandler = (event) => {
     let pickedFile;
@@ -82,7 +67,6 @@ export default function UpdateEnfant(props) {
       setIsValid(false);
       fileIsValid = false;
     }
-    /* props.onInput(props.id, pickedFile, fileIsValid); */
   };
 
   const pickImageHandler = (event) => {
@@ -94,6 +78,30 @@ export default function UpdateEnfant(props) {
   const [date, setDate] = useState(null);
   const [error, seterror] = useState(null);
   const [success, setsuccess] = useState(null);
+
+  
+  useEffect(() => {
+    const sendRequest = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/enfant/enfant/${id}`
+        );
+        const responseData = await response.json();
+        if (!response.ok) {
+          throw new Error(responseData.message);
+        }
+
+        setNom(responseData.existingEnfant.nom);
+        setPrenom(responseData.existingEnfant.prenom);
+        setDate(responseData.existingEnfant.date);
+      }
+       catch (err) {
+        seterror(err.message);
+      }
+    };
+
+    sendRequest();
+  }, []);
 
   const onchange = (e) => {
     if (e.target.name === "nom") {
@@ -138,7 +146,7 @@ export default function UpdateEnfant(props) {
       <Header
         absolute
         color="transparent"
-        brand="Material Kit React"
+        brand="Happy Kids"
         rightLinks={<HeaderLinks />}
         {...rest}
       />
@@ -182,10 +190,12 @@ export default function UpdateEnfant(props) {
                       
                       {!isValid && <p></p>}
                     </div>
+                    <Form.Label>Nom</Form.Label>
                     <CustomInput
-                      labelText="Nom..."
+                      
                       id="first"
                       name="nom"
+                      value={nom}
                       onChange={onchange}
                       formControlProps={{
                         fullWidth: true,
@@ -199,11 +209,12 @@ export default function UpdateEnfant(props) {
                         ),
                       }}
                     />
-
+                    <Form.Label>Prenom</Form.Label>
                     <CustomInput
-                      labelText="Prenom..."
+                     
                       id="first"
                       name="prenom"
+                      value={prenom}
                       onChange={onchange}
                       formControlProps={{
                         fullWidth: true,
@@ -225,9 +236,10 @@ export default function UpdateEnfant(props) {
                         type="date"
                         id="start"
                         name="date"
-                        min="1900-01-01"
+                        min="2016-01-01"
                         max="2021-12-31"
                         required
+                        value={date}
                         onChange={onchange}
                       ></input>
                     </Form.Group>

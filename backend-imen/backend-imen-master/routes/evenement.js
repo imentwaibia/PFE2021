@@ -27,8 +27,9 @@ route.patch(
   ],
   evenementControllers.updateEvenement
 );
-
-route.get("/:id", evenementControllers.getEvenementByJardinId);
+route.get("/", evenementControllers.getEvenement);
+route.get('/:id',evenementControllers.getEnfantsByJardinId);
+route.get("/evenement/:id", evenementControllers.getEvenementById);
 route.delete("/:id", evenementControllers.deleteEvenement);
 
 module.exports = route;

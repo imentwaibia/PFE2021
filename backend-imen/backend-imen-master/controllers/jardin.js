@@ -1,4 +1,5 @@
 const httpError = require("../models/error");
+const parent = require("../models/parent");
 
 const jardin = require("../models/jardin");
 
@@ -12,8 +13,8 @@ const log = console.log;
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.EMAIL || "twaibia.imen@gmail.com", // TODO: your gmail account
-    pass: process.env.PASSWORD || "imen1994", // TODO: your gmail password
+    user: process.env.EMAIL || "jardindenfant04@gmail.com", // TODO: your gmail account
+    pass: process.env.PASSWORD || "imen07969416", // TODO: your gmail password
   },
 });
 
@@ -22,10 +23,12 @@ const signup = async (req, res, next) => {
   if (!error.isEmpty()) {
     return next(new httpError("invalid input passed ", 422));
   }
-
+//  req.body
   const { nom, email,date, password, description, adresse, tel } = req.body;
+  
   let existingjardin;
   try {
+    // check if the email is not found in the database
     existingjardin = await jardin.findOne({ email: email });
   } catch (err) {
     const error = new httpError("problems!!!", 500);
@@ -62,7 +65,7 @@ const signup = async (req, res, next) => {
     const error = new httpError("failed signup", 500);
     return next(error);
   }
-
+// create a key using json webtoken
   let token;
   try {
     token = jwt.sign(
@@ -85,15 +88,18 @@ const signup = async (req, res, next) => {
 const login = async (req, res, next) => {
   const error = validationResult(req);
   if (!error.isEmpty()) {
-    return next(new httpError("invalid input passed", 422));
+    return next(new httpError("error", 422));
   }
+  // get the req.body
   const { email, password } = req.body;
   let existingJardin;
+   // seach if jardin exist
   try {
     existingJardin = await jardin.findOne({ email: email });
   } catch {
     return next(new httpError("failed!!", 500));
   }
+  // send an error if invalid password 
   if (!existingJardin || existingJardin.password !== password) {
     return next(new httpError("invalid input passed", 422));
   }
@@ -104,6 +110,7 @@ const login = async (req, res, next) => {
     );
   }
   let token;
+  // create a key using json webtoken
   try {
     token = jwt.sign(
       { userId: existingJardin.id, email: existingJardin.email },
@@ -114,17 +121,14 @@ const login = async (req, res, next) => {
     const error = new httpError("failed signup try again later", 500);
     return next(error);
   }
+   // send the details + token
   res.status(200).json({ jardin: existingJardin, token: token });
 };
 
 const updateJardin = async (req, res, next) => {
-  const error = validationResult(req);
-  if (!error.isEmpty()) {
-    return next(new httpError("invalid input passed ", 422));
-  }
 
   const { nom, email,date, password, description, adresse, tel } = req.body;
-  const UserId = req.params.id;
+  const UserId = req.params.UserId;
   let existingJardin;
 
   try {
@@ -139,7 +143,7 @@ const updateJardin = async (req, res, next) => {
   existingJardin.date_creation = date;
   existingJardin.adresse = adresse;
   existingJardin.tel = tel;
-  existingJardin.logo = req.file.path;
+  
 
   try {
     existingJardin.save();
@@ -169,7 +173,7 @@ const deleteJardin = async (req, res, next) => {
   }
   res.status(200).json({ message: "deleted" });
 };
-
+//getAllJardin
 const getJardin = async (req, res, next) => {
   let existingJardin;
   try {
@@ -180,7 +184,7 @@ const getJardin = async (req, res, next) => {
   }
   res.json({ existingJardin: existingJardin });
 };
-
+//getAll jardin by id
 const getJardinById = async (req, res, next) => {
   const UserId = req.params.UserId;
   let existingJardin;
@@ -237,15 +241,17 @@ const setDeleguer = async (req, res, next) => {
   try {
     existingJardin = await jardin.findById(id);
   } catch {
-    return next(new httpError("failed ", 500));
+    return next(new httpError("failed!! ", 500));
   }
-
+console.log(idParent); 
   let existingParent;
   try {
     existingParent = await parent.findById(idParent);
   } catch {
-    return next(new httpError("failed ", 500));
+    return next(new httpError("failed .. ", 500));
   }
+
+  console.log(existingParent); 
 
   existingJardin.parentDeligue = existingParent;
 
@@ -282,7 +288,7 @@ const ConfirmeJardin = async (req, res, next) => {
   }
 
   let mailOptions = {
-    from: "twaibia.imen@gmail.com", // TODO: email sender
+    from: "jardindenfant04@gmail.com", // TODO: email sender
     to: email, // TODO: email receiver
     subject: "Confirmation de creation de compte",
     text: "Votre Compte est bien confirmer",
