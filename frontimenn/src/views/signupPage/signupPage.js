@@ -67,7 +67,7 @@ export default function SignupPage(props) {
       setIsValid(false);
       fileIsValid = false;
     }
-    /* props.onInput(props.id, pickedFile, fileIsValid); */
+    
   };
 
   const pickImageHandler = (event) => {

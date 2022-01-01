@@ -65,7 +65,7 @@ export default function AjoutEnfant(props) {
       setIsValid(false);
       fileIsValid = false;
     }
-    /* props.onInput(props.id, pickedFile, fileIsValid); */
+    
   };
 
   const pickImageHandler = (event) => {
@@ -77,9 +77,11 @@ export default function AjoutEnfant(props) {
   const [date, setDate] = useState();
   const [error, seterror] = useState(null);
   const [success, setsuccess] = useState(null);
-
+//e evenement de onchange
+//onchange pour récupérer les valeurs d input
   const onchange = (e) => {
     if (e.target.name === "nom") {
+      //donner value de l input
       setNom(e.target.value);
     } else if (e.target.name === "prenom") {
       setPrenom(e.target.value);
@@ -90,7 +92,7 @@ export default function AjoutEnfant(props) {
 
   const id = useParams().id;
   const auth = useContext(Authcontext)
-
+//append ajouter des éléments dans une liste
   const submit = async (e) => {
     e.preventDefault();
 

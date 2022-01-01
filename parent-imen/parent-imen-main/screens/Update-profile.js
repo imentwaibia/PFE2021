@@ -12,7 +12,9 @@ import Card from "../components/Card";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Authcontext } from "../context/auth-context";
 
+
 const UpdateProfile = (props) => {
+  
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [nom, setNom] = useState();
@@ -45,7 +47,7 @@ const UpdateProfile = (props) => {
 
   useEffect(() => {
     const sendRequest = async () => {
-      const response = await fetch(`http://192.168.0.104:5000/api/parent/${auth.userId}`);
+      const response = await fetch(`${url}/api/parent/${auth.userId}`);
 
       const responseData = await response.json();
       if (!response.ok) {
@@ -67,7 +69,7 @@ const UpdateProfile = (props) => {
 
   const submit = async () => {
     let response = await fetch(
-      `http://192.168.0.104:5000/api/parent/${auth.userId}`,
+      `${url}/api/parent/${auth.userId}`,
       {
         method: "Patch",
         headers: {
@@ -89,6 +91,8 @@ const UpdateProfile = (props) => {
       throw new Error(responsedata.message);
     }
     Alert.alert("Message", "Votre compte est modifié", [{ text: "fermer" }]);
+    setLoading(false);
+  
   };
 
   return (
@@ -195,6 +199,9 @@ const UpdateProfile = (props) => {
 
         <View style={styles.buttonContainer}>
           <Button title="Modifier" color="#0086c3" onPress={submit} />
+          </View>
+          <View style={styles.buttonContainer}>
+          <Button title="Déconnexion" color="#4a148c" onPress={submit}/>
         </View>
       </ScrollView>
     </Card>
@@ -204,6 +211,7 @@ const UpdateProfile = (props) => {
 UpdateProfile.navigationOptions = {
   headerTitle: "Modifier Profile",
 };
+
 
 const styles = StyleSheet.create({
   screen: {

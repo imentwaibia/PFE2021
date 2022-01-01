@@ -115,21 +115,21 @@ export default function ListeEvenement(props) {
                 <SuccessModel success={success} />
                 {list && (
                   <TableContainer component={Paper}>
-                    <Table
+                    <Table style={{ backgroundColor: "#ffebee" }}
                       className={classes.table}
                       aria-label="customized table"
                     >
                       <TableHead>
                         <TableRow>
-                          <StyledTableCell>Image</StyledTableCell>
-                          <StyledTableCell>Titre</StyledTableCell>
-                          <StyledTableCell align="right">
+                          <StyledTableCell style={{ backgroundColor: "#566573" }}>Image</StyledTableCell>
+                          <StyledTableCell style={{ backgroundColor: "#566573" }}>Titre</StyledTableCell>
+                          <StyledTableCell align="right" style={{ backgroundColor: "#566573" }}>
                             Date
                           </StyledTableCell>
-                          <StyledTableCell align="right">
+                          <StyledTableCell align="right" style={{ backgroundColor: "#566573" }}>
                             Description
                           </StyledTableCell>
-                          <StyledTableCell align="right">
+                          <StyledTableCell align="right" style={{ backgroundColor: "#566573" }}>
                             Action
                           </StyledTableCell>
                         </TableRow>

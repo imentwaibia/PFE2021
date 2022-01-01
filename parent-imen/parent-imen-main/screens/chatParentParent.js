@@ -24,7 +24,7 @@ const ChatScreenParentParent = (props) => {
       const sendRequest = async () => {
         try {
           const response = await fetch(
-            `http://192.168.0.104:5000/api/message/parent/${auth.userId}`
+            `${url}/api/message/parent/${auth.userId}`
           );
 
           const responseData = await response.json();
@@ -54,7 +54,7 @@ const ChatScreenParentParent = (props) => {
     };
     setMessages(messages.concat(p));
 
-    let response = await fetch("http://192.168.0.104:5000/api/message/ajout/parent", {
+    let response = await fetch(`${url}/api/message/ajout/parent`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

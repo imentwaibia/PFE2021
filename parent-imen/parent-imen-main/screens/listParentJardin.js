@@ -33,7 +33,7 @@ const ListParentJardin = (props) => {
     wait(2000).then(() => setRefreshing(false));
     const sendRequest = async () => {
       const response = await fetch(
-        `http://192.168.0.104:5000/api/bonplan/site/${id}`
+        `${url}/api/bonplan/site/${id}`
       );
 
       const responseData = await response.json();
@@ -54,7 +54,7 @@ const ListParentJardin = (props) => {
   useEffect(() => {
     const sendRequest = async () => {
       const response = await fetch(
-        `http://192.168.0.104:5000/api/parent/jardin/${id}`
+        `${url}/api/parent/jardin/${id}`
       );
 
       const responseData = await response.json();

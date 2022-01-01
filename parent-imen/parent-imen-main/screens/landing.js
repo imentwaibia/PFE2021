@@ -20,7 +20,7 @@ const Landing = (props) => {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
     const sendRequest = async () => {
-      const response = await fetch(`http://192.168.0.104:5000/api/jardin/`);
+      const response = await fetch(`${url}/api/jardin/`);
 
       const responseData = await response.json();
       if (!response.ok) {
@@ -36,7 +36,7 @@ const Landing = (props) => {
 
   useEffect(() => {
     const sendRequest = async () => {
-      const response = await fetch(`http://192.168.0.104:5000/api/jardin`);
+      const response = await fetch(`${url}/api/jardin`);
 
       const responseData = await response.json();
       if (!response.ok) {
@@ -70,7 +70,7 @@ const Landing = (props) => {
                 <View>
                   <View style={{ ...styles.MealRow, ...styles.mealHeader }}>
                     <ImageBackground
-                      source={{ uri: `http://192.168.0.104:5000/${row.logo}` }}
+                      source={{ uri: `${url}/${row.logo}` }}
                       style={styles.bgImage}
                     >
                       <Text style={styles.title}>{props.title}</Text>

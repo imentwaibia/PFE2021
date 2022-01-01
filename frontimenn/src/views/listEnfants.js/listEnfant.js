@@ -115,21 +115,21 @@ export default function ListEnfant(props) {
                 <SuccessModel success={success} />
                 {enfants && (
                   <TableContainer component={Paper}>
-                    <Table
+                    <Table style={{ backgroundColor: "#ffebee" }}
                       className={classes.table}
                       aria-label="customized table"
                     >
                       <TableHead>
                         <TableRow>
-                          <StyledTableCell>Image</StyledTableCell>
-                          <StyledTableCell>Nom</StyledTableCell>
-                          <StyledTableCell align="right">
+                          <StyledTableCell style={{ backgroundColor: "#566573" }}>Image</StyledTableCell>
+                          <StyledTableCell style={{ backgroundColor: "#566573" }}>Nom</StyledTableCell>
+                          <StyledTableCell align="right" style={{ backgroundColor: "#566573" }}>
                             Prenom
                           </StyledTableCell>
-                          <StyledTableCell align="right">
+                          <StyledTableCell  style={{ backgroundColor: "#566573" }}align="right">
                             Date de naissance
                           </StyledTableCell>
-                          <StyledTableCell align="right">
+                          <StyledTableCell  style={{ backgroundColor: "#566573" }}align="right">
                             Action
                           </StyledTableCell>
                         </TableRow>

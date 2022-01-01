@@ -107,7 +107,7 @@ export default function ListParent(props) {
       
       <Header
         color="transparent"
-        brand=""
+        brand=" Happy Kids"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -138,22 +138,22 @@ export default function ListParent(props) {
                 />
                 {list && (
                   <TableContainer component={Paper}>
-                    <Table
+                    <Table style={{ backgroundColor: "#ffebee" }}
                       className={classes.table}
                       aria-label="customized table"
                     >
                       <TableHead>
                         <TableRow>
-                          <StyledTableCell>Nom</StyledTableCell>
-                          <StyledTableCell align="right">
+                          <StyledTableCell style={{ backgroundColor: "#566573" }}>Nom</StyledTableCell>
+                          <StyledTableCell style={{ backgroundColor: "#566573" }} align="right">
                             Prenom
                           </StyledTableCell>
-                          <StyledTableCell align="right">Email</StyledTableCell>
-                          <StyledTableCell align="right">
+                          <StyledTableCell  style={{ backgroundColor: "#566573" }}align="right">Email</StyledTableCell>
+                          <StyledTableCell  style={{ backgroundColor: "#566573" }}align="right">
                             Adresse
                           </StyledTableCell>
-                          <StyledTableCell align="right">Tel</StyledTableCell>
-                          <StyledTableCell align="right">
+                          <StyledTableCell  style={{ backgroundColor: "#566573" }}align="right">Tel</StyledTableCell>
+                          <StyledTableCell style={{ backgroundColor: "#566573" }} align="right">
                             Action
                           </StyledTableCell>
                         </TableRow>

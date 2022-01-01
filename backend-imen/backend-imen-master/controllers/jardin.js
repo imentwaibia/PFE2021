@@ -5,17 +5,20 @@ const jardin = require("../models/jardin");
 
 const { validationResult } = require("express-validator");
 
+
 const jwt = require("jsonwebtoken");
 
 const nodemailer = require("nodemailer");
+
 
 const log = console.log;
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.EMAIL || "jardindenfant04@gmail.com", // TODO: your gmail account
-    pass: process.env.PASSWORD || "imen07969416", // TODO: your gmail password
+    user: process.env.EMAIL || "twaibia.imen@gmail.com", // TODO: your gmail account
+    pass: process.env.PASSWORD || "imenmastere@@", // TODO: your gmail password
   },
+  
 });
 
 const signup = async (req, res, next) => {
@@ -28,6 +31,8 @@ const signup = async (req, res, next) => {
   
   let existingjardin;
   try {
+
+  
     // check if the email is not found in the database
     existingjardin = await jardin.findOne({ email: email });
   } catch (err) {
@@ -39,7 +44,6 @@ const signup = async (req, res, next) => {
     const error = new httpError("jardin exist", 422);
     return next(error);
   }
-
   const createdJardin = new jardin({
     nom,
     email,
@@ -65,6 +69,7 @@ const signup = async (req, res, next) => {
     const error = new httpError("failed signup", 500);
     return next(error);
   }
+
 // create a key using json webtoken
   let token;
   try {
@@ -288,8 +293,8 @@ const ConfirmeJardin = async (req, res, next) => {
   }
 
   let mailOptions = {
-    from: "jardindenfant04@gmail.com", // TODO: email sender
-    to: email, // TODO: email receiver
+    from: "twaibia.imen@gmail.com", // TODO: email sender
+    to: email , // TODO: email receiver
     subject: "Confirmation de creation de compte",
     text: "Votre Compte est bien confirmer",
   };

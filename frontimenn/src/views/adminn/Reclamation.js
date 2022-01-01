@@ -59,22 +59,22 @@ const useStyles = makeStyles(styles);
       const [success, setsuccess] = useState(null);
     
       const id = useParams().id;
-      useEffect(() => {
-        const sendRequest = async () => {
-          try {
-            const response = await fetch(`http://localhost:5000/api/reclamation/`);
-    
-            const responseData = await response.json();
-            if (!response.ok) {
-              throw new Error(responseData.message);
-            }
-    
-            setList(responseData.reclamation);
-          } catch (err) {
-            seterror(err.message);
+      
+      const sendRequest = async () => {
+        try {
+          const response = await fetch(`http://localhost:5000/api/reclamation/`);
+  
+          const responseData = await response.json();
+          if (!response.ok) {
+            throw new Error(responseData.message);
           }
-        };
-    
+  
+          setList(responseData.reclamation);
+        } catch (err) {
+          seterror(err.message);
+        }
+      };
+      useEffect(() => {
         sendRequest();
       }, []);
     
@@ -158,6 +158,7 @@ const useStyles = makeStyles(styles);
     
                                       setsuccess("Réclamation confirmer.");
                                       seterror(null);
+                                      sendRequest();
                                     } catch (err) {
                                       console.log(err);
                                       seterror(err.message || "probleme!!");

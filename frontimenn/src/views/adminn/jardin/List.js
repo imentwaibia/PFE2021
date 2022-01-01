@@ -103,7 +103,7 @@ const List = (props) => {
        
         <div className={classes.container}>
           
-              <center>
+            
       <Container style={{  margin: "2%" }}>
       
         <Row>
@@ -119,8 +119,7 @@ const List = (props) => {
                     <StyledTableCell align="right" style={{  backgroundColor: "#ABB2B9"}}>Nom</StyledTableCell>
                     <StyledTableCell align="right" style={{  backgroundColor: "#ABB2B9"}}>Email</StyledTableCell>
                     <StyledTableCell align="right" style={{  backgroundColor: "#ABB2B9"}}>Adresse</StyledTableCell>
-                    <StyledTableCell align="right" style={{  backgroundColor: "#ABB2B9"}}>Tel</StyledTableCell>
-                    <StyledTableCell align="right" style={{  backgroundColor: "#ABB2B9"}}>Description</StyledTableCell>
+                    
                     <StyledTableCell align="right" style={{  backgroundColor: "#ABB2B9"}}>Enafants</StyledTableCell>
                   </TableRow>
                 </TableHead>
@@ -144,12 +143,8 @@ const List = (props) => {
                         <StyledTableCell align="right">
                           {row.adresse}
                         </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {row.tel}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {row.description}
-                        </StyledTableCell>
+                       
+                        
                         <StyledTableCell align="right">
                           <Link to={`/Listenfant/${row._id}`}>
                             <AccessibilityIcon
@@ -169,7 +164,7 @@ const List = (props) => {
           <Col></Col>
         </Row>
       </Container>
-    </center>
+   
     
     </div>
     </div> 

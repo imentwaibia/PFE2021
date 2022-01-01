@@ -57,6 +57,10 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || "an unknown error occurred " });
 });
 //connect to db
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useUnifiedTopology', true);
+mongoose.set('useCreateIndex', true);
 mongoose
   .connect(
     "mongodb+srv://jardin:jardin@cluster0.jmmuw.mongodb.net/jardin?retryWrites=true&w=majority"

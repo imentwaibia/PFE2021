@@ -1,5 +1,6 @@
 /*eslint-disable*/
 import React from "react";
+import { Link } from "react-router-dom";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // nodejs library that concatenates classes
@@ -7,6 +8,7 @@ import classNames from "classnames";
 // material-ui core components
 import { List, ListItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+
 
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
@@ -32,45 +34,18 @@ export default function Footer(props) {
         <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/?ref=mkr-footer"
+              <Link to="/"
                 className={classes.block}
-                target="_blank"
+                
               >
-                Creative Tim
-              </a>
+               Acceuil
+               </Link>
             </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/presentation?ref=mkr-footer"
-                className={classes.block}
-                target="_blank"
-              >
-                About us
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="http://blog.creative-tim.com/?ref=mkr-footer"
-                className={classes.block}
-                target="_blank"
-              >
-                Blog
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/license?ref=mkr-footer"
-                className={classes.block}
-                target="_blank"
-              >
-                Licenses
-              </a>
-            </ListItem>
+           
           </List>
         </div>
         <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} , made with{" "}
+          &copy; {1900 + new Date().getYear()} {" "}
           <Favorite className={classes.icon} /> by{" "}
           <a
             className={aClasses}
@@ -78,7 +53,8 @@ export default function Footer(props) {
           >
             Imen 
           </a>{" "}
-          for a better web.
+          <Favorite className={classes.icon} />
+          "Happy Kids".
         </div>
       </div>
     </footer>

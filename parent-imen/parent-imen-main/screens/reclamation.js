@@ -26,7 +26,7 @@ const Reclamation = (props) => {
 
   const submit = async () => {
     let response = await fetch(
-      "http://192.168.0.104:5000/api/reclamation/ajout",
+      `${url}/api/reclamation/ajout`,
       {
         method: "POST",
         headers: {
@@ -60,7 +60,7 @@ const Reclamation = (props) => {
 
   useEffect(() => {
     const sendRequest = async () => {
-      const response = await fetch(`http://192.168.0.104:5000/api/jardin`);
+      const response = await fetch(`${url}/api/jardin`);
 
       const responseData = await response.json();
       if (!response.ok) {

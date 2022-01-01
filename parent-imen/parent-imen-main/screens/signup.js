@@ -42,7 +42,7 @@ const Signup = (props) => {
   const submit = async () => {
     
     let response = await fetch(
-      "http://192.168.0.104:5000/api/parent/signup",
+      `${url}/api/parent/signup`,
       {
         method: "POST",
         headers: {

@@ -32,7 +32,7 @@ const Login = (props) => {
     setLoading(true);
 
     let response = await fetch(
-      "http://192.168.0.104:5000/api/parent/login",
+      `${url}/api/parent/login`,
       {
         method: "POST",
         headers: {
